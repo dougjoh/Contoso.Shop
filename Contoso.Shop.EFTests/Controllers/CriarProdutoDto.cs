@@ -9,5 +9,8 @@ namespace Contoso.Shop.EFTests.Controllers
 
         [Required, Range(0.01, 1000000)]
         public decimal Preco { get; set; }
+
+        [MinLength(10), MaxLength(250)]
+        public string Descricao { get; set; }
     }
 }
