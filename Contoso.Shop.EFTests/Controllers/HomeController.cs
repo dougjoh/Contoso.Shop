@@ -1,5 +1,6 @@
 ﻿using Contoso.Shop.EFTests.Services;
 using Contoso.Shop.EFTests.Shop;
+using Contoso.Shop.EFTests.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,19 @@ namespace Contoso.Shop.EFTests.Controllers
             this.produtoService = produtoService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ListaProdutosViewModel vm)
         {
-            var produtos = produtoService.ObterTodos();
+            if(vm == null)
+            {
+                vm = new ListaProdutosViewModel();
+            }
 
-            return Ok(produtos);
+            vm.Produtos = produtoService.ObterTodos(vm.TermoPesquisa);
+
+           
+
+            return View(vm);
+            //return Ok(produtos);
         }
         [HttpPost]
         public IActionResult Create([FromBody]CriarProdutoDto dto)
