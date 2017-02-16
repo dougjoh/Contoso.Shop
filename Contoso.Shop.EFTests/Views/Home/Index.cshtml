@@ -1,0 +1,28 @@
+@using Contoso.Shop.EFTests.ViewModels
+@model ListaProdutosViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <ul>
+        <form asp-action="Index" asp-controller="Home" method="post">
+            <label asp-for="TermoPesquisa"></label>
+            <input asp-for="TermoPesquisa"/>
+            <input type="submit" value="Filtrar" />
+        </form>
+        @foreach (var produto in Model.Produtos)
+        {
+            <li>@produto.Nome - @produto.Preco</li>
+
+        }
+    </ul>
+</body>
+</html>
